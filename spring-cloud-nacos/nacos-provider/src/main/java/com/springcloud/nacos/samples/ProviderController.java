@@ -15,25 +15,27 @@
  * limitations under the License.
  */
 
-package com.springcloud.eureka.samples;
+package com.springcloud.nacos.samples;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
-@EnableEurekaServer
-public class ConsumerApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(ConsumerApplication.class, args);
+@RestController
+public class ProviderController {
+
+  @Value("${nacos.test}")
+  private String config;
+  // a very simple service to echo the request parameter
+  @GetMapping("/sayHello")
+  public String sayHello(@RequestParam("name") String name) {
+    return "Hello " + name;
   }
 
-  @LoadBalanced
-  @Bean
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
+  @GetMapping("/testConfig")
+  public String testConfig() {
+    return "nacos.test: " + config;
   }
+
 }

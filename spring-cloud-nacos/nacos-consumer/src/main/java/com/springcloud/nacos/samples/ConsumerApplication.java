@@ -15,22 +15,25 @@
  * limitations under the License.
  */
 
-package com.springcloud.eureka.samples;
+package com.springcloud.nacos.samples;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@RestController
-public class ConsumerController {
-  @Autowired
-  private RestTemplate restTemplate;
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ConsumerApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(ConsumerApplication.class, args);
+  }
 
-  // consumer service which delegate the implementation to provider service.
-  @GetMapping("/sayHello")
-  public String sayHello(@RequestParam("name") String name) {
-    return restTemplate.getForObject("http://eureka-provider/sayHello?name={1}", String.class, name);
+  @LoadBalanced
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
   }
 }

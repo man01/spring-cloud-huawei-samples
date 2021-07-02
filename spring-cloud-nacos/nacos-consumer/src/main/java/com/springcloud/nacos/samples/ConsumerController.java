@@ -15,16 +15,22 @@
  * limitations under the License.
  */
 
-package com.springcloud.eureka.samples;
+package com.springcloud.nacos.samples;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication
-@EnableEurekaServer
-public class ProviderApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(ProviderApplication.class, args);
+@RestController
+public class ConsumerController {
+  @Autowired
+  private RestTemplate restTemplate;
+
+  // consumer service which delegate the implementation to provider service.
+  @GetMapping("/consumer")
+  public String sayHello(@RequestParam("name") String name) {
+    return restTemplate.getForObject("http://nacos-provider/sayHello?name={1}", String.class, name);
   }
 }

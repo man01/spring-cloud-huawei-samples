@@ -15,17 +15,16 @@
  * limitations under the License.
  */
 
-package com.springcloud.eureka.samples;
+package com.springcloud.nacos.samples;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@RestController
-public class ProviderController {
-  // a very simple service to echo the request parameter
-  @GetMapping("/sayHello")
-  public String sayHello(@RequestParam("name") String name) {
-    return "Hello " + name;
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ProviderApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(ProviderApplication.class, args);
   }
 }

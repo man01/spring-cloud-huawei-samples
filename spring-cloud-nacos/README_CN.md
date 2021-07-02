@@ -1,6 +1,6 @@
 # Spring Cloud Huawei 代码示例 [English](README.md) 
 
-这个子项目是为了演示如果将 Spring Cloud 原生服务改造成 Spring Cloud Huawei 服务。
+这个子项目是为了演示如果将 Spring Cloud + nacos服务改造成 Spring Cloud Huawei 服务。
 
 
 ## 前提条件--改造服务

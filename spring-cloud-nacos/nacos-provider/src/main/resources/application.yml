@@ -15,16 +15,17 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
-
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name : eureka-consumer
-eureka:
-  client:
-    serviceUrl:
-      defaultZone : http://localhost:8085/eureka/
-
-
+    name: nacos-provider
+  test: default
+  cloud:
+    nacos:
+      discovery:
+        server-addr: mse-xxx-p.ancos-ans.mse.aliyuncs.com:6443
+      config:
+        server-addr: mse-xxx-p.ancos-ans.mse.aliyuncs.com:6443
+        prefix: ${spring.application.name}

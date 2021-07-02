@@ -16,17 +16,16 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 server:
-  port : 8085
+  port: 8082
 
-eureka:
-  instance:
-    hostname : localhost
+spring:
   application:
-    name : eureka-provider
-  client:
-    registerWithEureka : false
-    fetchRegistry : false
-    serviceUrl:
-      defaultZone : http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-      enable-self-preservation: true
+    name: nacos-consumer
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: mse-xxxx-p.ancos-ans.mse.aliyuncs.com:6443
+      config:
+        server-addr: mse-xxxx-p.ancos-ans.mse.aliyuncs.com:6443
+        prefix: ${spring.application.name}

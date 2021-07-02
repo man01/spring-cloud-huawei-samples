@@ -1,6 +1,6 @@
 # Spring Cloud Huawei Samples [中文](README_CN.md) 
 
-This subproject is to demonstrate how to transform the spring cloud native service into spring cloud Huawei service.
+This subproject is to demonstrate how to transform the spring cloud + nacos service into spring cloud Huawei service.
 
 ##Prerequisite: Transformation Service
 
