@@ -42,7 +42,7 @@ public class GovernanceController {
 
     int retry = retryTimes.get(invocationID);
 
-    if (retry  == 3) {
+    if (retry == 3) {
       return "try times: " + retry;
     }
     response.setStatus(502);
@@ -52,5 +52,10 @@ public class GovernanceController {
   @RequestMapping("/circuitBreaker")
   public String circuitBreaker() {
     throw new RuntimeException("circuitBreaker by provider.");
+  }
+
+  @RequestMapping("/bulkhead")
+  public String bulkhead() {
+    return "bulkhead by provider!";
   }
 }

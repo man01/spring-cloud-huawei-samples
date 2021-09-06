@@ -17,6 +17,12 @@
 
 package com.huaweicloud.sample;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +65,25 @@ public class GovernanceController {
   }
 
   @RequestMapping("/bulkhead")
-  public String bulkhead() {
-    return restTemplate.getForObject("http://price/hello", String.class);
+  public String bulkhead(@RequestParam(name = "num", required = false, defaultValue = "1") int num) {
+    CountDownLatch latch = new CountDownLatch(1);
+    Map<String, Object> temp = new HashMap<>();
+    for (int i = 0; i < num; i++) {
+      for (int j = 0; j < 10; j++) {
+        String name = "t-" + i + "-" + j;
+        new Thread(name) {
+          public void run() {
+            String result = restTemplate.getForObject("http://price/bulkhead", String.class);
+            latch.countDown();
+          }
+        }.start();
+      }
+    }
+    try {
+      latch.await();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return "test bulkhead is end!";
   }
 }
