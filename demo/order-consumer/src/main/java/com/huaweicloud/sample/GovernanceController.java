@@ -42,12 +42,12 @@ public class GovernanceController {
 
   @RequestMapping("/hello")
   public String hello() {
-    return restTemplate.getForObject("http://price/hello", String.class);
+    return restTemplate.getForObject("http://provider/hello", String.class);
   }
 
   @RequestMapping("/retry")
   public String retry(@RequestParam(name = "invocationID") String invocationID) {
-    return restTemplate.getForObject("http://price/retry?invocationID={1}", String.class, invocationID);
+    return restTemplate.getForObject("http://provider/retry?invocationID={1}", String.class, invocationID);
   }
 
   @RequestMapping("/retryFeign")
@@ -73,7 +73,7 @@ public class GovernanceController {
         String name = "t-" + i + "-" + j;
         new Thread(name) {
           public void run() {
-            String result = restTemplate.getForObject("http://price/bulkhead", String.class);
+            String result = restTemplate.getForObject("http://provider/bulkhead", String.class);
             latch.countDown();
           }
         }.start();

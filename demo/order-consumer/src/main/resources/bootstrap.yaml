@@ -16,26 +16,31 @@
 #
 server:
   port: 9098
-
+#填写你的工号
+APP_ID: z00xxxx
 spring:
   application:
-    name: order
+    name: consumer
   cloud:
     servicecomb:
       discovery:
         enabled: true
-        address: http://127.0.0.1:30100
-        serviceName: order
+        address: https://100.85.220.234:30100
+        serviceName: consumer
         version: 0.0.1
+        appName: ${APP_ID}
       config:
         enabled: true
         serverType: kie
-        serverAddr: http://127.0.0.1:30110
+        serverAddr: https://100.85.220.234:30110
         fileSource: provider.yaml
       # testing servicecomb swagger generation
       swagger:
         enableJavaChassisAdapter: true
-
+      credentials:
+        account:
+          name: root
+          password: Qaz@123456
 #      config:
 #        enabled: false
 
@@ -70,4 +75,4 @@ spring:
 #      failureRateThreshold: 20
 #  bulkhead:
 #    demo-bulkhead: |
-#      maxConcurrentCalls: 5
+#      maxConcurrentCalls: 10

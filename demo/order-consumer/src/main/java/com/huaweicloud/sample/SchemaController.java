@@ -50,7 +50,7 @@ public class SchemaController {
 
   @RequestMapping("/testSchemaGeneratorSpringCloud")
   public String testSchemaGeneratorSpringCloud() {
-    return restTemplate.getForObject("http://price/testSchemaGenerator", String.class);
+    return restTemplate.getForObject("http://provider/testSchemaGenerator", String.class);
   }
 
   @RequestMapping("/testSchemaGeneratorServiceComb")

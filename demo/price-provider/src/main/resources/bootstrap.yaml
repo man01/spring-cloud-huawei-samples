@@ -16,28 +16,33 @@
 #
 server:
   port: 9090
-
+#填写你的工号
+APP_ID: z00xxxx
 spring:
   application:
-    name: price
+    name: provider
   cloud:
     servicecomb:
       discovery:
         enabled: true
         # testing multiple registries
-        address: http://127.0.0.1:30100
-        serviceName: price
+        address: https://100.85.220.234:30100
+        serviceName: provider
         version: 0.0.1
+        appName: ${APP_ID}
         healthCheckInterval: 30
       config:
         enabled: true
         serverType: kie
-        serverAddr: http://127.0.0.1:30110
+        serverAddr: https://100.85.220.234:30110
         fileSource: provider.yaml
 
       # testing spring cloud swagger generation
       swagger:
         enableJavaChassisAdapter: false
-
+      credentials:
+        account:
+          name: root
+          password: Qaz@123456
 #      config:
 #        enabled: false

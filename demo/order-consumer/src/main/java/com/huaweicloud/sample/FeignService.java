@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "price")
+@FeignClient(name = "provider")
 public interface FeignService {
-  @PostMapping("/price")
+  @PostMapping("/provider")
   String getPrice(@RequestParam("id") Long id);
 
   @RequestMapping("/retry")

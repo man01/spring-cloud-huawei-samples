@@ -28,7 +28,7 @@ public class PriceController {
   @Autowired
   private Configuration configuration;
 
-  @RequestMapping("/price")
+  @RequestMapping("/provider")
   public String sayHello(@RequestParam("id") String id) {
     return id;
   }

@@ -35,18 +35,18 @@ public class OrderController {
 
   @RequestMapping("/instances")
   public Object instances() {
-    return discoveryClient.getInstances("price");
+    return discoveryClient.getInstances("provider");
   }
 
   @RequestMapping("/order")
   public String getOrder(@RequestParam("id") String id) {
-    String callServiceResult = restTemplate.getForObject("http://price/price?id=" + id, String.class);
+    String callServiceResult = restTemplate.getForObject("http://provider/provider?id=" + id, String.class);
     return callServiceResult;
   }
 
   @RequestMapping("/configuration")
   public String getEnums() {
-    return restTemplate.getForObject("http://price/configuration", String.class);
+    return restTemplate.getForObject("http://provider/configuration", String.class);
   }
 
   @RequestMapping(value = "/services", method = RequestMethod.GET)
