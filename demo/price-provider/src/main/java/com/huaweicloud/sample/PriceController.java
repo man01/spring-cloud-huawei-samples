@@ -35,8 +35,6 @@ public class PriceController {
 
   @RequestMapping("/configuration")
   public String getEnums() {
-    List<EnumType> enums = configuration.getEnums();
-
-    return enums.toString() + ":" + configuration.getName();
+    return "price.test.name value is: " + configuration.getName();
   }
 }
